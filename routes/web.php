@@ -13,5 +13,7 @@ Route::get('/', 'HomeController@index')->name('home');
 //Restfull API
 Route::resource('/customers', 'customersController');
 Route::resource('/actions', 'actionsController');
+//PHP Traits
+Route::get('/trait', 'HomeController@trait');
 
 Auth::routes();

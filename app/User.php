@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+	
+	public function photos(){
+        return $this->morphMany('App\Photos', 'photosable');
+    }
+    public function defaultImage(){ 
+        return $this->photos()->orderBy('id','DESC')->first();
+    }
+    public function allPhotos(){ 
+        return $this->photos()->orderBy('id','DESC')->get();
+    }
 }

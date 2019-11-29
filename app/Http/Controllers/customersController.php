@@ -23,7 +23,13 @@ class customersController extends Controller
 	    $this->validate($req,$valarr);
 	    $req['user_id']=Auth::user()->id;
 	    $req['slug']=Str::slug($req['customer_name']);
-	    Customers::create($req->all());
+	    $customer=Customers::create($req->all());
+		$photo=$req->file('photo');
+		$photosPath = public_path('/img/brofiles');
+		$photoName=Str::random(20);
+		$photoName.='.'.$photo->getClientOriginalExtension();
+		$photo->move($photosPath,$photoName);
+		$customer->photos()->create(['url'=>$photoName]);
 	    return back()->with('message', $req['customer_name'].' Created Successfully');
     }
 

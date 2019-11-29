@@ -48,6 +48,26 @@
     </table>
     {{ $customers->links() }}
 </div>
+<hr>
+<div class="container">
+    <h3>Change Profile Photo</h3>
+    <form method="POST" action="/uploadimage" enctype="multipart/form-data">
+        @csrf
+        <label for="email" class="form-label">Upload New</label>
+        <input id="photo" type="file" class="@error('photo') is-invalid @enderror" name="photo">
+        <br>
+        <button class="btn btn-success" type="submit">Save</button>
+    </form>
+    <hr>
+    <h3>Previous Photos</h3>
+    <div class="row">
+        @foreach(Auth::user()->allPhotos() as $v)
+        <div class="col-md-4">
+            <img src="{{asset('/img/brofiles').'/'.$v->url}}" style="width: 200px; height: 200px;">
+        </div>
+        @endforeach
+    </div>
+</div>
 <script type="text/javascript">
     function remove(slug) {
         $('#remove'+slug).submit();

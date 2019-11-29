@@ -10,6 +10,9 @@
 //Must Be Auth To Login DashBoard
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+//Customized Register
+Route::post('/registeruser', 'Auth\RegisterController@register');
+Route::post('/uploadimage', 'HomeController@changephoto');
 //Restfull API
 Route::resource('/customers', 'customersController');
 Route::resource('/actions', 'actionsController');
